@@ -1,0 +1,153 @@
+{
+  "info": {
+    "name": "Ride Booking API",
+    "description": "Laravel 12 Ride Booking APIs for Passenger and Driver flows",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Passenger APIs",
+      "item": [
+        {
+          "name": "Create Ride Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"passenger_id\": 1,\n  \"pickup_lat\": 23.0101,\n  \"pickup_lng\": 72.5710,\n  \"destination_lat\": 23.0305,\n  \"destination_lng\": 72.6002\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/passenger/ride",
+              "host": ["{{base_url}}"],
+              "path": ["api", "passenger", "ride"]
+            }
+          }
+        },
+        {
+          "name": "Approve Driver for Ride",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"driver_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/passenger/ride/1/approve-driver",
+              "host": ["{{base_url}}"],
+              "path": ["api", "passenger", "ride", "1", "approve-driver"]
+            }
+          }
+        },
+        {
+          "name": "Passenger Mark Ride Completed",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/api/passenger/ride/1/complete",
+              "host": ["{{base_url}}"],
+              "path": ["api", "passenger", "ride", "1", "complete"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Driver APIs",
+      "item": [
+        {
+          "name": "Update Driver Location",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"driver_id\": 1,\n  \"latitude\": 23.0120,\n  \"longitude\": 72.5725\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/driver/location",
+              "host": ["{{base_url}}"],
+              "path": ["api", "driver", "location"]
+            }
+          }
+        },
+        {
+          "name": "Fetch Nearby Pending Rides",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/api/driver/rides/nearby?latitude=23.0120&longitude=72.5725",
+              "host": ["{{base_url}}"],
+              "path": ["api", "driver", "rides", "nearby"],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "23.0120"
+                },
+                {
+                  "key": "longitude",
+                  "value": "72.5725"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Driver Request / Claim Ride",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"driver_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/driver/ride/1/request",
+              "host": ["{{base_url}}"],
+              "path": ["api", "driver", "ride", "1", "request"]
+            }
+          }
+        },
+        {
+          "name": "Driver Mark Ride Completed",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/api/driver/ride/1/complete",
+              "host": ["{{base_url}}"],
+              "path": ["api", "driver", "ride", "1", "complete"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
