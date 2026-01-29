@@ -60,18 +60,56 @@
 
         </div>
 
-    </div>
+        <!-- Timestamps -->
+        <div class="bg-gray-50 p-6 rounded-lg border">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                Ride Timestamps
+            </h3>
 
-    <!-- Fullscreen Modal -->
-    <div id="mapModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
-        <div class="bg-white w-11/12 h-5/6 rounded-lg relative">
-            <button id="closeMapBtn" class="absolute top-3 right-4 text-xl text-gray-600 hover:text-black">
-                ✕
-            </button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
 
-            <div id="mapFullscreen" class="w-full h-full rounded-lg"></div>
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Ride Created</span>
+                    <span class="font-medium text-gray-800">
+                        {{ $ride->created_at->diffForHumans() }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Last Updated</span>
+                    <span class="font-medium text-gray-800">
+                        {{ $ride->updated_at->diffForHumans() }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Passenger Completed</span>
+                    <span class="font-medium {{ $ride->passenger_completed ? 'text-green-600' : 'text-gray-400' }}">
+                        {{ $ride->passenger_completed ? 'Yes' : 'Pending' }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between">
+                    <span class="text-gray-500">Driver Completed</span>
+                    <span class="font-medium {{ $ride->driver_completed ? 'text-green-600' : 'text-gray-400' }}">
+                        {{ $ride->driver_completed ? 'Yes' : 'Pending' }}
+                    </span>
+                </div>
+
+                <div class="flex justify-between md:col-span-2">
+                    <span class="text-gray-500">Ride Fully Completed</span>
+                    <span class="font-semibold {{ $ride->isFullyCompleted() ? 'text-green-700' : 'text-red-600' }}">
+                        {{ $ride->isFullyCompleted() ? 'Completed' : 'In Progress' }}
+                    </span>
+                </div>
+
+            </div>
         </div>
+
+
     </div>
+
+
 
     {{-- Load JS --}}
     <script src="{{ asset('js/admin/ride-map.js') }}"></script>
