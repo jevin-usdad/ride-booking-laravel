@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Driver;
 use App\Models\Ride;
 use App\Models\RideDriverRequest;
+use App\RideStatus;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -32,7 +33,7 @@ class DriverController extends Controller
 
         $radius = 5; // km
 
-        $rides = Ride::where('status', 'pending')
+        $rides = Ride::where('status', RideStatus::PENDING->value)
             ->selectRaw("
                 *, (6371 * acos(
                     cos(radians(?)) * cos(radians(pickup_lat))
@@ -58,7 +59,7 @@ class DriverController extends Controller
             'driver_id' => $request->driver_id,
         ]);
 
-        $ride->update(['status' => 'driver_requested']);
+        $ride->update(['status' => RideStatus::DRIVER_REQUESTED->value]);
 
         return response()->json(['message' => 'Ride requested']);
     }
@@ -68,7 +69,7 @@ class DriverController extends Controller
         $ride->update(['driver_completed' => true]);
 
         if ($ride->isFullyCompleted()) {
-            $ride->update(['status' => 'completed']);
+            $ride->update(['status' => RideStatus::COMPLETED->value]);
         }
 
         return response()->json(['message' => 'Driver marked ride completed']);

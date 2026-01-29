@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Passenger\CreateRideRequest;
 use App\Models\Ride;
+use App\RideStatus;
 use Illuminate\Http\Request;
 
 class PassengerRideController extends Controller
@@ -24,7 +25,7 @@ class PassengerRideController extends Controller
 
         $ride->update([
             'driver_id' => $request->driver_id,
-            'status' => 'approved'
+            'status' => RideStatus::APPROVED->value
         ]);
 
         return response()->json(['message' => 'Driver approved']);
@@ -35,7 +36,7 @@ class PassengerRideController extends Controller
         $ride->update(['passenger_completed' => true]);
 
         if ($ride->isFullyCompleted()) {
-            $ride->update(['status' => 'completed']);
+            $ride->update(['status' => RideStatus::COMPLETED->value]);
         }
 
         return response()->json(['message' => 'Passenger marked ride completed']);
