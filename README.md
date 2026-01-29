@@ -1,11 +1,11 @@
-# 🚕 Ride Booking System – Laravel 12
+# Ride Booking System – Laravel 12
 
 A simple backend system built with Laravel 12 that exposes APIs for a mobile
 ride-booking application and a Blade-based admin panel.
 
 ---
 
-## 📌 Features
+## Features
 
 ### Passenger APIs
 - Create ride request (pickup & destination coordinates)
@@ -27,7 +27,7 @@ ride-booking application and a Blade-based admin panel.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 - Laravel 12
 - PHP 8.2+
 - MySQL
@@ -36,7 +36,7 @@ ride-booking application and a Blade-based admin panel.
 
 ---
 
-## 🚀 Installation Steps
+## Installation Steps
 
 ```bash
 git clone https://github.com/your-username/ride-booking.git
